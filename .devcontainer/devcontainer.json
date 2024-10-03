@@ -1,0 +1,30 @@
+{
+	"name": "LaravelApp",
+	"dockerComposeFile": "compose.yml",
+	"service": "devcontainer",
+	"shutdownAction": "stopCompose",
+	"workspaceFolder": "/workspaces",
+	// "forwardPorts": [
+	// 	3000,
+	// 	8000
+	// ],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"remote.autoForwardPorts": false,
+				"editor.formatOnPaste": true,
+				"editor.formatOnSave": true,
+				"editor.minimap.enabled": false,
+				"editor.wordWrap": "on",
+				"[php]": {
+					"editor.defaultFormatter": "shufo.vscode-blade-formatter"
+				}
+			},
+			"extensions": [
+				"entexa.tall-stack",
+				"onecentlin.laravel-blade"
+			]
+		}
+	},
+	"postCreateCommand": "npm install && composer install"
+}

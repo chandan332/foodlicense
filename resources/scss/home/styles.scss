@@ -1,0 +1,33 @@
+.bg-image {
+    background-position: center;
+    background-size: cover;
+    aspect-ratio: 1/1;
+    border-radius: 300px;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) var(--delay, 1s);
+}
+
+.animate > div {
+    overflow: hidden;
+}
+
+.animate > div > * {
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) var(--delay, 1s);
+}
+
+.animate.hidden > div > :is(h1, p, div, button, a) {
+    transform: translateY(110%);
+    opacity: 0;
+}
+
+.animate.show > div > :is(h1, p, div, button, a) {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+.animate.hidden + div.bg-image {
+    filter: blur(10px);
+}
+
+.animate.show + div.bg-image {
+    filter: blur(0px);
+}

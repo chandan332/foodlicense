@@ -1,0 +1,12 @@
+/* fontawesome css */
+@import "@fortawesome/fontawesome-free/css/all.css";
+/* bootstrap css */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* tailwind css */ 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./global";
+@import "./home/styles";
