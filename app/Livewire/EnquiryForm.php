@@ -27,8 +27,6 @@ class EnquiryForm extends Component
 
     public string $state = '';
 
-    public bool $submitted = false;
-
     public function mount(ServiceType $service): void
     {
         $this->service = $service;
@@ -45,8 +43,7 @@ class EnquiryForm extends Component
             'state' => $validated['state'],
         ]);
 
-        $this->reset('fullName', 'mobileNumber', 'state');
-        $this->submitted = true;
+        $this->redirectRoute('thank-you', navigate: true);
     }
 
     public function render(): View

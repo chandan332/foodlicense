@@ -1,12 +1,6 @@
 <div id="enquiry" class="bg-white rounded-2xl shadow-2xl p-8 text-gray-800">
     <h2 class="text-2xl font-bold mb-6 text-center text-gray-900">Apply Now</h2>
 
-    @if ($submitted)
-        <div role="status" class="mb-4 rounded-lg bg-green-50 p-4 text-sm text-green-800">
-            Thank you. We have received your enquiry and will contact you shortly.
-        </div>
-    @endif
-
     <form wire:submit="save" class="space-y-4">
         <div>
             <label for="full-name" class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>

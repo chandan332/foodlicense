@@ -23,12 +23,12 @@ export default defineConfig({
         host: '0.0.0.0',
         cors: true,
         ws: {
-            host: '192.168.68.51',
+            host: '192.168.68.52',
         },
         watch: {
             ignored: ['**/storage/framework/views/**'],
-            // usePolling: true,
-            // interval: 100,
+            usePolling: true,
+            interval: 100,
         },
     },
 });

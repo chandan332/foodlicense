@@ -5,6 +5,7 @@ use App\Livewire\EnquiryForm;
 use App\Livewire\HomePage;
 use App\Livewire\Navigation;
 use App\Livewire\ServicePage;
+use App\Livewire\ThankYouPage;
 use App\Models\Enquiry;
 use Livewire\Livewire;
 
@@ -17,7 +18,20 @@ it('renders every public page as a Livewire component', function (string $route,
     ['/fssai-registration', ServicePage::class],
     ['/gst-registration', ServicePage::class],
     ['/trademark-registration', ServicePage::class],
+    ['/thank-you', ThankYouPage::class],
 ]);
+
+it('renders a thank-you page that returns to home after five seconds', function (): void {
+    $this->get(route('thank-you'))
+        ->assertOk()
+        ->assertSeeLivewire(ThankYouPage::class)
+        ->assertSee('Thank you for your enquiry')
+        ->assertSee('data-redirect-delay="5000"', false)
+        ->assertSee(route('home'), false)
+        ->assertSee('let secondsRemaining = 5;', false)
+        ->assertSee('window.setInterval', false)
+        ->assertSee('}, 1000);', false);
+});
 
 it('accepts the resolved service enum when mounting a service page', function (): void {
     Livewire::test(ServicePage::class, ['service' => ServiceType::Fssai])
@@ -25,18 +39,14 @@ it('accepts the resolved service enum when mounting a service page', function ()
         ->assertSee('FSSAI Registration & License');
 });
 
-it('stores a valid enquiry and shows a success message', function (ServiceType $service): void {
+it('stores a valid enquiry and redirects to the thank-you page', function (ServiceType $service): void {
     Livewire::test(EnquiryForm::class, ['service' => $service])
         ->set('fullName', 'Asha Sharma')
         ->set('mobileNumber', '9876543210')
         ->set('state', 'Delhi')
         ->call('save')
         ->assertHasNoErrors()
-        ->assertSet('submitted', true)
-        ->assertSet('fullName', '')
-        ->assertSet('mobileNumber', '')
-        ->assertSet('state', '')
-        ->assertSee('Thank you. We have received your enquiry');
+        ->assertRedirect(route('thank-you'));
 
     $enquiry = Enquiry::query()->sole();
 
